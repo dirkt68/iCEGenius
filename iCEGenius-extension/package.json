@@ -9,15 +9,26 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:verilog"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "iCEGenius-extension.helloWorld",
+        "category": "iCEGenius",
         "title": "Hello World"
       }
-    ]
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "iCEGenius-extension.helloWorld",
+          "when": "editorLangId == verilog"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
