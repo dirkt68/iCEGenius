@@ -1,9 +1,80 @@
-<mxfile host="app.diagrams.net" modified="2023-06-07T03:05:00.768Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" version="21.2.9" etag="zHGSOzuIqUSD7uPkQTnk" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-07T03:35:58.222Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="HlkDKSHLvgKE7-e3JvGC" version="21.3.7" type="github">
   <diagram name="Page-1" id="Wt6WmzWsnAuD62WFf2Iy">
-    <mxGraphModel>
+    <mxGraphModel dx="1218" dy="653" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-1" target="HfTd72xEXfZpGFcJEyhP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-1" value="User creates Verilog program and testbench" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-2" target="HfTd72xEXfZpGFcJEyhP-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-18" value="Click Simulate Icon" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HfTd72xEXfZpGFcJEyhP-7">
+          <mxGeometry x="-0.388" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-2" target="HfTd72xEXfZpGFcJEyhP-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-19" value="Click Program Icon" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HfTd72xEXfZpGFcJEyhP-14">
+          <mxGeometry x="-0.4294" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-2" value="Simulate or Program?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="300" width="140" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-4" target="HfTd72xEXfZpGFcJEyhP-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-4" value="Compile code with iverilog" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-5" target="HfTd72xEXfZpGFcJEyhP-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-5" value="Generate waveform with vvp" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-6" target="HfTd72xEXfZpGFcJEyhP-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="740" />
+              <mxPoint x="250" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-6" value="If user sets &quot;Auto-Launch GTKWave&quot; to true, open waveform&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-11" target="HfTd72xEXfZpGFcJEyhP-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-11" value="Synthesize code with yosys" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-12" target="HfTd72xEXfZpGFcJEyhP-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-12" value="Place and Route with nextpnr" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="HfTd72xEXfZpGFcJEyhP-13" target="HfTd72xEXfZpGFcJEyhP-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="740" />
+              <mxPoint x="880" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HfTd72xEXfZpGFcJEyhP-13" value="Flash bitstream to SPI flash on PCB with programmer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="710" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
