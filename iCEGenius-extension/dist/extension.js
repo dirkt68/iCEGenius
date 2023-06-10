@@ -7,6 +7,72 @@
 
 module.exports = require("vscode");
 
+/***/ }),
+/* 2 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Handler = void 0;
+const vscode = __webpack_require__(1); // vscode api
+class Handler {
+    // constructor to init the Handler
+    constructor() {
+        // grab user configurations for the extension
+        const config = vscode.workspace.getConfiguration("iCEGenius-extension");
+        // set the path to the tools, if none found default to C:\oss-cad-suite
+        this.pathToSuite = config.get("oss-cad-suite-path", "C:\\oss-cad-suite");
+        // this command will automatically run gtkwave after simulation compiles unless otherwise specified
+        this.autoOpenGTK = config.get("auto-open-gtkwave", true);
+        // create global output channel
+        this.outputConsole = vscode.window.createOutputChannel("iCEGenius");
+    }
+    // function to execute automatic simulation
+    simulate() {
+        // 1. search cwd for verilog files
+        // 2. create file-list.txt with all files
+        // 3. run iverilog
+        // 4. run vvp
+        // 5. if gtkwave true, open gtkwave
+        this.outputConsole.show(true);
+        this.outputConsole.appendLine("Simulating Verilog...");
+        // prevent execution if a previous process is still running
+        if (this.currSim || this.currBuild) {
+            this.outputConsole.appendLine("A process is currently running! Exiting...");
+            return;
+        }
+        return;
+    }
+    // function to build project and upload it to board
+    buildAndUpload() {
+        // 1. collect all verilog files
+        // 2. run through yosys
+        // 3. run through nextpnr
+        // 4. run through flash
+        this.outputConsole.show(true);
+        this.outputConsole.appendLine("Building...");
+        // prevent execution if a previous process is still running
+        if (this.currSim || this.currBuild) {
+            this.outputConsole.appendLine("A process is currently running! Exiting...");
+            return;
+        }
+        return;
+    }
+    // helper functions
+    cleanup(buildOrSim) {
+        switch (buildOrSim) {
+            case "build":
+                break;
+            case "sim":
+                break;
+            default:
+                break;
+        }
+    }
+}
+exports.Handler = Handler;
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -43,19 +109,19 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.deactivate = exports.activate = void 0;
 const vscode = __webpack_require__(1);
+const handler_1 = __webpack_require__(2);
 function activate(context) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "iCEGenius-extension" is now active!');
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('iCEGenius-extension.helloWorld', () => {
-        // The code you place here will be executed every time your command is executed
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World from iCEGenius Simulator and Programmer!');
+    const helper = new handler_1.Handler(); // instantiate handler with functions
+    // register the two commands
+    let simulator = vscode.commands.registerCommand('iCEGenius-extension.sim', () => {
+        helper.simulate();
     });
-    context.subscriptions.push(disposable);
+    let builder = vscode.commands.registerCommand('iCEGenius-extension.buildAndUpload', () => {
+        helper.buildAndUpload();
+    });
+    // let vscode know about them
+    context.subscriptions.push(simulator);
+    context.subscriptions.push(builder);
 }
 exports.activate = activate;
 // This method is called when your extension is deactivated

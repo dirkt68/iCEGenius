@@ -1,21 +1,21 @@
 import * as vscode from 'vscode';
+import { Handler } from "./handler";
 
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "iCEGenius-extension" is now active!');
+	const helper: Handler = new Handler(); // instantiate handler with functions
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('iCEGenius-extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from iCEGenius Simulator and Programmer!');
+	// register the two commands
+	let simulator: vscode.Disposable = vscode.commands.registerCommand('iCEGenius-extension.sim', () => {
+		helper.simulate();
+	});
+	let builder: vscode.Disposable = vscode.commands.registerCommand('iCEGenius-extension.buildAndUpload', () => { 
+		helper.buildAndUpload();
 	});
 
-	context.subscriptions.push(disposable);
+	// let vscode know about them
+	context.subscriptions.push(simulator);
+	context.subscriptions.push(builder);
 }
 
 // This method is called when your extension is deactivated

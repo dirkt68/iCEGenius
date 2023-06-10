@@ -6,6 +6,7 @@
 
   (title_block
     (title "Overview")
+    (rev "2")
   )
 
   (lib_symbols
@@ -3237,7 +3238,7 @@
     (uuid f4521004-bb71-4f54-b66d-1f1136736a8e)
   )
 
-  (text "USB-SPI Controller" (at 86.36 107.95 0)
+  (text "USB-SPI Bridge" (at 86.36 107.95 0)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 293d7ec6-ac68-4d5d-9471-8f078c6b9758)
   )

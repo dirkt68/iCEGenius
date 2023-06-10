@@ -16,18 +16,42 @@
   "contributes": {
     "commands": [
       {
-        "command": "iCEGenius-extension.helloWorld",
+        "command": "iCEGenius-extension.sim",
         "category": "iCEGenius",
-        "title": "Hello World"
+        "title": "Simulate Verilog"
+      },
+      {
+        "command": "iCEGenius-extension.buildAndUpload",
+        "category": "iCEGenius",
+        "title": "Build and Upload Verilog"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "iCEGenius-extension.helloWorld",
+          "command": "iCEGenius-extension.sim",
+          "when": "editorLangId == verilog"
+        },
+        {
+          "command": "iCEGenius-extension.buildAndUpload",
           "when": "editorLangId == verilog"
         }
       ]
+    },
+    "configuration": {
+      "title": "iCEGenius",
+      "properties": {
+        "iCEGenius-extension.oss-cad-suite-path": {
+          "type": "string",
+          "default": "C:\\oss-cad-suite",
+          "description": "The path to the oss-cad-suite folder can be set here. The default value is \"C:\\oss-cad-suite\". The path should not contain spaces."
+        },
+        "iCEGenius-extension.auto-open-gtkwave": {
+          "type": "boolean",
+          "default": "true",
+          "description": "GTKWave will be opened automatically post-simulation. If not wanted, set to false."
+        }
+      }
     }
   },
   "scripts": {
