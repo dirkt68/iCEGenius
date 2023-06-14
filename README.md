@@ -1,5 +1,5 @@
-# iCEGenius
-A low cost, low power, minimally sized FPGA development board based on the iCE40 FPGA.
+# iCEGenius (WIP)
+A low cost, low power, minimally sized FPGA development board based on the iCE40LP384 FPGA.
 
 ## Directory Structure
 - board (where anything related to PCB lives)
