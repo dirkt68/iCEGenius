@@ -1,0 +1,79 @@
+$date
+	Tue Jun 13 11:16:40 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	10ns
+$end
+$scope module leds_tb $end
+$var wire 1 ! l0 $end
+$var wire 1 " l1 $end
+$var wire 1 # l2 $end
+$var wire 1 $ l3 $end
+$var wire 1 % l4 $end
+$var parameter 32 & DURATION $end
+$var reg 1 ' clk $end
+$scope module UUT $end
+$var wire 1 ! LED0 $end
+$var wire 1 " LED1 $end
+$var wire 1 # LED2 $end
+$var wire 1 $ LED3 $end
+$var wire 1 % LED4 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 &
+$end
+#0
+$dumpvars
+0'
+1%
+0$
+1#
+0"
+1!
+$end
+#5
+1'
+#10
+0'
+#15
+1'
+#20
+0'
+#25
+1'
+#30
+0'
+#35
+1'
+#40
+0'
+#45
+1'
+#50
+0'
+#55
+1'
+#60
+0'
+#65
+1'
+#70
+0'
+#75
+1'
+#80
+0'
+#85
+1'
+#90
+0'
+#95
+1'
+#100
+0'

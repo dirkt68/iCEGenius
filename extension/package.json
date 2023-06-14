@@ -18,12 +18,20 @@
       {
         "command": "iCEGenius-extension.sim",
         "category": "iCEGenius",
-        "title": "Simulate Verilog"
+        "title": "Simulate Verilog",
+        "icon": {
+          "light": "resources/sim_wave_light_mode.svg",
+          "dark": "resources/sim_wave_dark_mode.svg"
+        }
       },
       {
         "command": "iCEGenius-extension.buildAndUpload",
         "category": "iCEGenius",
-        "title": "Build and Upload Verilog"
+        "title": "Build and Upload Verilog",
+        "icon": {
+          "light": "resources/upload_light_mode.svg",
+          "dark": "resources/upload_dark_mode.svg"
+        }
       }
     ],
     "menus": {
@@ -35,6 +43,18 @@
         {
           "command": "iCEGenius-extension.buildAndUpload",
           "when": "editorLangId == verilog"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "iCEGenius-extension.sim",
+          "when": "editorLangId == verilog",
+          "group": "navigation"
+        },
+        {
+          "command": "iCEGenius-extension.buildAndUpload",
+          "when": "editorLangId == verilog",
+          "group": "navigation"
         }
       ]
     },

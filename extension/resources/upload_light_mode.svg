@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="mdil-upload"
+   viewBox="0 0 24 24"
+   version="1.1"
+   sodipodi:docname="upload_light_mode.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="9.8333333"
+     inkscape:cx="9.1016949"
+     inkscape:cy="12"
+     inkscape:window-width="2560"
+     inkscape:window-height="1506"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="mdil-upload" />
+  <path
+     d="M 11.470588,16.586667 V 5.6977778 L 16.411765,10.364444 17.117647,9.7777778 11,4 4.8823529,9.7777778 5.5882353,10.364444 10.529412,5.6977778 V 16.586667 h 0.941176 M 3,17.333333 h 0.9411765 v 1.777778 H 18.058824 V 17.333333 H 19 V 20 H 3 Z"
+     id="path2"
+     style="fill:#333333;fill-opacity:1;stroke-width:0.914659" />
+</svg>
