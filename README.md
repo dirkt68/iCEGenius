@@ -10,6 +10,7 @@ A low cost, low power, minimally sized FPGA development board based on the iCE40
   - [Project Goal](#project-goal)
   - [Setup](#setup)
   - [Directory Structure](#directory-structure)
+  - [Support](#support)
   - [Wishlist](#wishlist)
   - [Creator](#creator)
 
@@ -53,6 +54,9 @@ The PCB was developed in Kicad 7.0 and the extension supports Visual Studio Code
   - includes (*.h files)
   - libs (*.lib files)
   - src (main code)
+
+## Support
+- Any suggestions are welcome! I will not be super active all the time, but I'd like to maintain the project as much as I can.
 
 ## Wishlist
 - add linux and mac support
