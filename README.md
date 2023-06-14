@@ -33,7 +33,7 @@ The PCB was developed in Kicad 7.0 and the extension supports Visual Studio Code
 ## Setup
 
 1. Grab the latest binary of oss-cad-suite from https://github.com/YosysHQ/oss-cad-suite-build and extract to `C:/oss-cad-suite`.
-2. Install the latest binary of the iCEGenius Programmer from the `Releases` Tab.
+2. Install the latest binary of the iCEGenius Programmer from the [`Releases`](https://github.com/dirkt68/iCEGenius/releases/) Tab.
 3. Install [Visual Studio Code](https://code.visualstudio.com) and install the iCEGenius (ADD HYPERLINK TO EXTENSION) extension.
 4. Write some Verilog and upload to your board!
 
