@@ -3589,15 +3589,12 @@ function activate(context) {
         // if no workspace is open, get folder from currently open file
         const currFilePath = vscode.window.activeTextEditor?.document.fileName;
         // parse the responses
-        let folderPath;
+        let folderPath = undefined;
         if (workspaceFolders && workspaceFolders.length > 0) {
             folderPath = workspaceFolders[0].uri.fsPath;
         }
         else if (currFilePath) {
             folderPath = currFilePath.substring(0, currFilePath.lastIndexOf("\\"));
-        }
-        else {
-            folderPath = undefined;
         }
         // if nothing after that, then we kill program
         if (!folderPath) {
@@ -3613,15 +3610,12 @@ function activate(context) {
         // if no workspace is open, get folder from currently open file
         const currFilePath = vscode.window.activeTextEditor?.document.fileName;
         // parse the responses
-        let folderPath;
+        let folderPath = undefined;
         if (workspaceFolders && workspaceFolders.length > 0) {
             folderPath = workspaceFolders[0].uri.fsPath;
         }
         else if (currFilePath) {
             folderPath = currFilePath.substring(0, currFilePath.lastIndexOf("\\"));
-        }
-        else {
-            folderPath = undefined;
         }
         // if nothing after that, then we kill program
         if (!folderPath) {
@@ -3631,7 +3625,7 @@ function activate(context) {
         // run actual function
         helper.buildAndUpload(folderPath);
     });
-    // let vscode know about the buttons
+    // let vscode know about the functions
     context.subscriptions.push(simulator);
     context.subscriptions.push(builder);
 }
