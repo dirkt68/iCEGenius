@@ -12,7 +12,7 @@ A low cost, low power, minimally sized FPGA development board based on the iCE40
   - [Directory Structure](#directory-structure)
   - [Support](#support)
   - [Wishlist](#wishlist)
-  - [Creator](#creator)
+  - [Author Information](#author-information)
 
 ## Project Goal
 
@@ -62,7 +62,7 @@ The PCB was developed in Kicad 7.0 and the extension supports Visual Studio Code
 - add linux and mac support
 - host a prebuilt board somewhere where people can buy (where?)
 
-## Creator
+## Author Information
 - Made by Dirk Thieme for use in ECE 2372 for the Capstone Project Lab at Texas Tech University. Advised by Derek A. Johnston.
 
 
