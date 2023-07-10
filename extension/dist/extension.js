@@ -18,7 +18,7 @@ exports.Handler = void 0;
 const vscode = __webpack_require__(1); // vscode api
 const fs_1 = __webpack_require__(3); // filesystem stuff
 const glob_1 = __webpack_require__(4); // file collection
-const path = __webpack_require__(7); //
+const path = __webpack_require__(7); // filename printing
 const child_process_1 = __webpack_require__(22); // execute command line stuff
 class Handler {
     // constructor to init the Handler
@@ -65,9 +65,10 @@ class Handler {
         const textFilePath = fixedPath + '/files.txt';
         this.tempFilesToDelete.push(textFilePath); // note down file for deletion after the script ends
         // print out files found and write them to the output file
+        this.outputConsole.appendLine(`Found ${totalFiles.length} *.v files:`);
         for (const filename of totalFiles) {
             (0, fs_1.appendFileSync)(textFilePath, `${filename}\n`);
-            this.outputConsole.appendLine(`Files Found: ${path.basename(filename)}`);
+            this.outputConsole.appendLine(`File Found: ${path.basename(filename)}`);
         }
         // just for formatting
         this.outputConsole.appendLine("");
@@ -77,13 +78,86 @@ class Handler {
         const VVP_CMD = `vvp sim`;
         // build full set of commands based on if the user wants to open gtkwave
         const FULL_CMD = `${CD_CMD} && ${this.ENV_CMD} && ${IVERILOG_CMD} && ${VVP_CMD}`;
+        this.runCommand(FULL_CMD, fixedPath);
+        return;
+    }
+    // function to build project and upload it to board
+    buildAndUpload(cwd) {
+        // contraints:
+        // all testbenches must be in separate files and must end with _tb (ex leds.v <- file, leds_tb.v <- testbench)
+        // no modules can be included with `include statements
+        this.outputConsole.show(true);
+        const currTime = new Date();
+        this.outputConsole.appendLine(`========== iCEGenius | ${currTime} | Building ==========\n`);
+        // prevent execution if a previous process is still running
+        if (this.currSim || this.currBuild) {
+            this.outputConsole.appendLine("A process is currently running! Exiting...");
+            return;
+        }
+        // process is active
+        this.currBuild = true;
+        this.outputConsole.appendLine(`Current directory: ${cwd}`);
+        // find all *.v files that exist in the current directory and any underneath
+        const fixedPath = cwd.replace(/\\/g, '/');
+        const totalVerilogFiles = glob_1.glob.sync(fixedPath + '/**/*.v');
+        const testbenchFiles = glob_1.glob.sync(fixedPath + '/**/*_tb.v');
+        // remove testbenches from list of files to use
+        const verilogNoTestBenchArray = totalVerilogFiles.filter((val) => !testbenchFiles.includes(val));
+        if (verilogNoTestBenchArray.length < 1) {
+            this.outputConsole.appendLine("No *.v files found , exiting...");
+            return;
+        }
+        // find all *.pcf file for i/o constraints 
+        const pcfFiles = glob_1.glob.sync(fixedPath + '/**/*.pcf');
+        if (pcfFiles.length > 1) {
+            this.outputConsole.appendLine(`More than one *.pcf file found, defaulting to file ${pcfFiles[0]}`);
+            this.outputConsole.appendLine(`If this file is incorrect, remove all other pcf files except the desired one`);
+        }
+        else if (pcfFiles.length === 0) {
+            this.outputConsole.appendLine("No *.pcf files found, cannot constrain external inputs and outputs!");
+            this.outputConsole.appendLine("Exiting...");
+            return;
+        }
+        const pcf = pcfFiles[0];
+        // create yosys synthesis script
+        // TODO: migrate to tcl?
+        const ysFilePath = fixedPath + '/synth.ys';
+        this.tempFilesToDelete.push(ysFilePath); // mark file for cleanup later
+        this.outputConsole.appendLine(`Found ${verilogNoTestBenchArray.length} files:`);
+        for (const filename of verilogNoTestBenchArray) {
+            (0, fs_1.appendFileSync)(ysFilePath, `read_verilog ${filename}\n`);
+            this.outputConsole.appendLine(`File Found: ${path.basename(filename)}`);
+        }
+        // add final synthesis command to script
+        (0, fs_1.appendFileSync)(ysFilePath, `\nsynth_ice40 -device lp -json out.json`);
+        // setup commands
+        const CD_CMD = `cd /d ${fixedPath}`; // switch to cwd
+        const YOSYS_CMD = `yosys -s synth.ys`; // run synthesis command
+        const NEXTPNR_CMD = `nextpnr-ice40 -v --json out.json --pcf ${pcf} --lp384 --package qn32 --asc out.asc`; // run implementation
+        const ICEPACK_CMD = `icepack out.asc bitstream.bin`; // generate bitstream
+        const PROG_CMD = `echo PROGRAMMER NOT DONE`; // ! NOT DONE flash to board
+        const FULL_CMD = `${CD_CMD} && ${this.ENV_CMD} && ${YOSYS_CMD} && ${NEXTPNR_CMD} && ${ICEPACK_CMD} && ${PROG_CMD}`;
+        // run command
+        this.runCommand(FULL_CMD, fixedPath);
+        return;
+    }
+    // helper functions
+    cleanup() {
+        // delete all temporary files made
+        for (const file of this.tempFilesToDelete) {
+            (0, fs_1.unlinkSync)(file);
+        }
+        this.tempFilesToDelete = [];
+        this.currBuild = false;
+        this.currSim = false;
+    }
+    runCommand(command, path) {
         try { // attempt to successfully run all simulation commands 
-            this.outputConsole.appendLine(`Executing ${FULL_CMD}`);
-            this.outputConsole.appendLine((0, child_process_1.execSync)(FULL_CMD).toString());
-            this.outputConsole.appendLine("Simulation Executed Successfully!");
-            // open gtkwave automatically if true
-            if (this.autoOpenGTK) {
-                const vcdFile = glob_1.glob.sync(fixedPath + '/**/*.vcd')[0];
+            this.outputConsole.appendLine(`Executing ${command}`);
+            this.outputConsole.appendLine((0, child_process_1.execSync)(command).toString());
+            // open gtkwave automatically if true and simulation is happening
+            if (this.autoOpenGTK && this.currSim) {
+                const vcdFile = glob_1.glob.sync(path + '/**/*.vcd')[0];
                 const GTK_CMD = `gtkwave ${vcdFile}`;
                 (0, child_process_1.exec)(`${this.ENV_CMD} && ${GTK_CMD}`);
             }
@@ -105,44 +179,9 @@ class Handler {
         }
         finally {
             // no matter what happens, delete temp files and end simulation
-            this.outputConsole.appendLine("==================== Simulation Finished ====================\n");
+            this.outputConsole.appendLine("==================== Finished ====================\n");
             this.cleanup();
-            this.currSim = false;
         }
-        return;
-    }
-    // function to build project and upload it to board
-    buildAndUpload(cwd) {
-        // 1. collect all verilog files
-        // 2. run through yosys
-        // 3. run through nextpnr
-        // 4. run through flasher
-        // remove file name from path
-        this.outputConsole.show(true);
-        this.outputConsole.appendLine("Building...");
-        // prevent execution if a previous process is still running
-        if (this.currSim || this.currBuild) {
-            this.outputConsole.appendLine("A process is currently running! Exiting...");
-            return;
-        }
-        this.outputConsole.appendLine(`Current directory: ${cwd}`);
-        // find all *.v files that exist in the current directory and any underneath
-        const fixedPath = cwd.replace(/\\/g, '/');
-        const totalVerilogFiles = glob_1.glob.sync(fixedPath + '/**/*.v');
-        if (totalVerilogFiles.length < 1) {
-            this.outputConsole.appendLine("No *.v files found , exiting...");
-            return;
-        }
-        this.outputConsole.appendLine(`Files Found: ${totalVerilogFiles}`);
-        this.cleanup();
-        return;
-    }
-    // helper functions
-    cleanup() {
-        for (const file of this.tempFilesToDelete) {
-            (0, fs_1.unlinkSync)(file);
-        }
-        this.tempFilesToDelete = [];
     }
 }
 exports.Handler = Handler;

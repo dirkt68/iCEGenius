@@ -1,61 +1,44 @@
 #! 
 :ivl_version "13.0 (devel)" "(s20221226-153-gc74048a52)";
 :ivl_delay_selection "TYPICAL";
-:vpi_time_precision - 8;
+:vpi_time_precision - 12;
 :vpi_module "C:\OSS-CA~1\lib\ivl\system.vpi";
 :vpi_module "C:\OSS-CA~1\lib\ivl\vhdl_sys.vpi";
 :vpi_module "C:\OSS-CA~1\lib\ivl\vhdl_textio.vpi";
 :vpi_module "C:\OSS-CA~1\lib\ivl\v2005_math.vpi";
 :vpi_module "C:\OSS-CA~1\lib\ivl\va_math.vpi";
-S_0000000004a1ade0 .scope module, "leds_tb" "leds_tb" 2 13;
- .timescale -7 -8;
-P_0000000004a1ce80 .param/l "DURATION" 0 2 16, +C4<00000000000000000000000000001010>;
-v0000000004a19940_0 .var "clk", 0 0;
-L_0000000004928848 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
-v0000000004a1b100_0 .net "l0", 0 0, L_0000000004928848;  1 drivers
-L_0000000004928890 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
-v0000000004a1bc70_0 .net "l1", 0 0, L_0000000004928890;  1 drivers
-L_00000000049288d8 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
-v00000000049281e0_0 .net "l2", 0 0, L_00000000049288d8;  1 drivers
-L_0000000004928920 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
-v0000000004927b00_0 .net "l3", 0 0, L_0000000004928920;  1 drivers
-L_0000000004928968 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
-v00000000049285a0_0 .net "l4", 0 0, L_0000000004928968;  1 drivers
-S_0000000004a1af70 .scope module, "UUT" "leds" 2 26, 3 9 0, S_0000000004a1ade0;
- .timescale -7 -8;
+S_0000000004006760 .scope module, "leds_tb" "leds_tb" 2 11;
+ .timescale -9 -12;
+L_0000000006168848 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v0000000004006a80_0 .net "l0", 0 0, L_0000000006168848;  1 drivers
+L_0000000006168890 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0000000004006b20_0 .net "l1", 0 0, L_0000000006168890;  1 drivers
+L_00000000061688d8 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v000000000400b8e0_0 .net "l2", 0 0, L_00000000061688d8;  1 drivers
+L_0000000006168920 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v000000000400b980_0 .net "l3", 0 0, L_0000000006168920;  1 drivers
+L_0000000006168968 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v0000000006168500_0 .net "l4", 0 0, L_0000000006168968;  1 drivers
+S_00000000040068f0 .scope module, "UUT" "leds" 2 17, 3 11 0, S_0000000004006760;
+ .timescale -9 -12;
     .port_info 0 /OUTPUT 1 "LED0";
     .port_info 1 /OUTPUT 1 "LED1";
     .port_info 2 /OUTPUT 1 "LED2";
     .port_info 3 /OUTPUT 1 "LED3";
     .port_info 4 /OUTPUT 1 "LED4";
-v00000000048b3c20_0 .net "LED0", 0 0, L_0000000004928848;  alias, 1 drivers
-v0000000004a16a70_0 .net "LED1", 0 0, L_0000000004928890;  alias, 1 drivers
-v0000000004a19e80_0 .net "LED2", 0 0, L_00000000049288d8;  alias, 1 drivers
-v0000000004a19cc0_0 .net "LED3", 0 0, L_0000000004928920;  alias, 1 drivers
-v0000000004a19b00_0 .net "LED4", 0 0, L_0000000004928968;  alias, 1 drivers
-    .scope S_0000000004a1ade0;
+v0000000004009220_0 .net "LED0", 0 0, L_0000000006168848;  alias, 1 drivers
+v00000000061268f0_0 .net "LED1", 0 0, L_0000000006168890;  alias, 1 drivers
+v0000000004009060_0 .net "LED2", 0 0, L_00000000061688d8;  alias, 1 drivers
+v0000000004008ea0_0 .net "LED3", 0 0, L_0000000006168920;  alias, 1 drivers
+v0000000004008ce0_0 .net "LED4", 0 0, L_0000000006168968;  alias, 1 drivers
+    .scope S_0000000004006760;
 T_0 ;
-    %pushi/vec4 0, 0, 1;
-    %store/vec4 v0000000004a19940_0, 0, 1;
+    %vpi_call 2 26 "$dumpfile", "test.vcd" {0 0 0};
+    %vpi_call 2 27 "$dumpvars", 32'sb00000000000000000000000000000000, S_0000000004006760 {0 0 0};
+    %delay 10000000, 0;
+    %vpi_call 2 30 "$finish" {0 0 0};
     %end;
     .thread T_0;
-    .scope S_0000000004a1ade0;
-T_1 ;
-    %delay 5, 0;
-    %load/vec4 v0000000004a19940_0;
-    %inv;
-    %store/vec4 v0000000004a19940_0, 0, 1;
-    %jmp T_1;
-    .thread T_1;
-    .scope S_0000000004a1ade0;
-T_2 ;
-    %vpi_call 2 38 "$dumpfile", "dsad.vcd" {0 0 0};
-    %vpi_call 2 39 "$dumpvars", 32'sb00000000000000000000000000000000, S_0000000004a1ade0 {0 0 0};
-    %delay 100, 0;
-    %vpi_call 2 41 "$display", "End of simulation" {0 0 0};
-    %vpi_call 2 42 "$finish" {0 0 0};
-    %end;
-    .thread T_2;
 # The file index is used to find the file name in the following table.
 :file_names 4;
     "N/A";
