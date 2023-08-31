@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCEGenius-prog", "iCEGenius-prog\iCEGenius-prog.csproj", "{DA2D9489-2D37-46B3-9068-9466D3312B54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCP2210", "iCEGenius-prog\MCP2210\MCP2210\MCP2210.csproj", "{F52F11E7-4EE0-439D-A6F7-6ED0214BA8B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA2D9489-2D37-46B3-9068-9466D3312B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2D9489-2D37-46B3-9068-9466D3312B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2D9489-2D37-46B3-9068-9466D3312B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2D9489-2D37-46B3-9068-9466D3312B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52F11E7-4EE0-439D-A6F7-6ED0214BA8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52F11E7-4EE0-439D-A6F7-6ED0214BA8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52F11E7-4EE0-439D-A6F7-6ED0214BA8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52F11E7-4EE0-439D-A6F7-6ED0214BA8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94273984-0648-4460-A219-C9CF12E595A9}
+	EndGlobalSection
+EndGlobal

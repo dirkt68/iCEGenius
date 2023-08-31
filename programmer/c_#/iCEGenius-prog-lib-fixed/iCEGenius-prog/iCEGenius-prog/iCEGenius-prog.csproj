@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>iCEGenius_prog</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+
+
+    <ItemGroup>
+      <Compile Remove="MCP2210\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="MCP2210\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="MCP2210\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="MCP2210\MCP2210\MCP2210.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="HidSharp" Version="2.1.0" />
+    </ItemGroup>
+
+</Project>

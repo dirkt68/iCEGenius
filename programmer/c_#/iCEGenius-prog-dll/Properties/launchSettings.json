@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "iCEGenius-prog": {
+      "commandName": "Project",
+      "commandLineArgs": "bitstream.bin",
+      "workingDirectory": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog"
+    }
+  }
+}

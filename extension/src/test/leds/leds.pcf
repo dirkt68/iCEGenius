@@ -3,4 +3,3 @@ set_io LED3 2
 set_io LED2 5
 set_io LED1 6
 set_io LED0 7
-set_io clk  8

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "iCEGenius-prog/1.0.0": {
+        "dependencies": {
+          "mcp2210_dll_m_dotnetv4_x64": "1.0.5980.19136"
+        },
+        "runtime": {
+          "iCEGenius-prog.dll": {}
+        }
+      },
+      "mcp2210_dll_m_dotnetv4_x64/1.0.5980.19136": {
+        "runtime": {
+          "mcp2210_dll_m_dotnetv4_x64.dll": {
+            "assemblyVersion": "1.0.5980.19136",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "iCEGenius-prog/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "mcp2210_dll_m_dotnetv4_x64/1.0.5980.19136": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

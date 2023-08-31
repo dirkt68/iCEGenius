@@ -1,0 +1,3 @@
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog-lib-fixed\iCEGenius-prog\iCEGenius-prog\bin\Release\net8.0\win-x64\publish\iCEGenius-prog.pdb
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog-lib-fixed\iCEGenius-prog\iCEGenius-prog\bin\Release\net8.0\win-x64\publish\MCP2210.pdb
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog-lib-fixed\iCEGenius-prog\iCEGenius-prog\bin\Release\net8.0\win-x64\publish\iCEGenius-prog.exe

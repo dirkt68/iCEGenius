@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "4C759iBZg+89ptAVv7buOiUiEvKxIYQN6dlixBYK4+hDN8l2OXAOxacVMSmgwWXr3yhi4aSFpHoiQx9itwAmpw==",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-dll\\iCEGenius-prog.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dirkt\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.9\\microsoft.netcore.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\dirkt\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.9\\microsoft.windowsdesktop.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\dirkt\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.9\\microsoft.aspnetcore.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\dirkt\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.9\\microsoft.netcore.app.host.win-x64.7.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}

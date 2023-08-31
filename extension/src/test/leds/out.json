@@ -9645,28 +9645,12 @@
     "leds": {
       "attributes": {
         "top": "00000000000000000000000000000001",
-        "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:11.1-24.10"
+        "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:11.1-26.10"
       },
       "ports": {
         "LED0": {
           "direction": "output",
-          "bits": [ "1" ]
-        },
-        "LED1": {
-          "direction": "output",
           "bits": [ "0" ]
-        },
-        "LED2": {
-          "direction": "output",
-          "bits": [ "1" ]
-        },
-        "LED3": {
-          "direction": "output",
-          "bits": [ "0" ]
-        },
-        "LED4": {
-          "direction": "output",
-          "bits": [ "1" ]
         }
       },
       "cells": {
@@ -9674,37 +9658,9 @@
       "netnames": {
         "LED0": {
           "hide_name": 0,
-          "bits": [ "1" ],
-          "attributes": {
-            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:12.25-12.29"
-          }
-        },
-        "LED1": {
-          "hide_name": 0,
           "bits": [ "0" ],
           "attributes": {
-            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:13.25-13.29"
-          }
-        },
-        "LED2": {
-          "hide_name": 0,
-          "bits": [ "1" ],
-          "attributes": {
-            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:14.25-14.29"
-          }
-        },
-        "LED3": {
-          "hide_name": 0,
-          "bits": [ "0" ],
-          "attributes": {
-            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:15.25-15.29"
-          }
-        },
-        "LED4": {
-          "hide_name": 0,
-          "bits": [ "1" ],
-          "attributes": {
-            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:16.25-16.29"
+            "src": "d:/Documents/School/TTU/summer23/project-lab-4/iCEGenius/extension/src/test/leds/src/leds.v:11.20-11.24"
           }
         }
       }

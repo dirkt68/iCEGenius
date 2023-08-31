@@ -1,0 +1,140 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\iCEGenius-prog.csproj": {}
+  },
+  "projects": {
+    "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\iCEGenius-prog.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\iCEGenius-prog.csproj",
+        "projectName": "iCEGenius-prog",
+        "projectPath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\iCEGenius-prog.csproj",
+        "packagesPath": "C:\\Users\\dirkt\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\dirkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://www.nuget.org/api/v2": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\MCP2210.csproj": {
+                "projectPath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\MCP2210.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "default"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "HidSharp": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.100-preview.7.23376.3\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\MCP2210.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\MCP2210.csproj",
+        "projectName": "MCP2210",
+        "projectPath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\MCP2210.csproj",
+        "packagesPath": "C:\\Users\\dirkt\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\School\\TTU\\summer23\\project-lab-4\\iCEGenius\\programmer\\c_#\\iCEGenius-prog-lib-fixed\\iCEGenius-prog\\iCEGenius-prog\\MCP2210\\MCP2210\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\dirkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://www.nuget.org/api/v2": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "default"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "HidSharp": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.100-preview.7.23376.3\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

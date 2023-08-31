@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>iCEGenius_prog</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="mcp2210_dll_m_dotnetv4_x64">
+      <HintPath>mcp2210_dll_m_dotnetv4_x64.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

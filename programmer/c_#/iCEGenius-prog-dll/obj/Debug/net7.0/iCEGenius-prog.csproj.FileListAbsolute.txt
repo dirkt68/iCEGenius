@@ -1,0 +1,17 @@
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.exe
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.deps.json
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.runtimeconfig.json
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.dll
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.pdb
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.csproj.AssemblyReference.cache
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.AssemblyInfoInputs.cache
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.AssemblyInfo.cs
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.csproj.CoreCompileInputs.cache
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.dll
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\refint\iCEGenius-prog.dll
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.pdb
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.genruntimeconfig.cache
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\ref\iCEGenius-prog.dll
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\mcp2210_dll_m_dotnetv4_x64.dll
+D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\obj\Debug\net7.0\iCEGenius-prog.csproj.CopyComplete

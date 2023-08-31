@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>iCEGenius-prog</id>
+    <version>1.0.0</version>
+    <authors>iCEGenius-prog</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net7.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.runtimeconfig.json" target="lib\net7.0\iCEGenius-prog.runtimeconfig.json" />
+    <file src="D:\Documents\School\TTU\summer23\project-lab-4\iCEGenius\programmer\c_#\iCEGenius-prog\bin\Debug\net7.0\iCEGenius-prog.dll" target="lib\net7.0\iCEGenius-prog.dll" />
+  </files>
+</package>
