@@ -1,9 +1,10 @@
 import * as vscode from "vscode"; // vscode api
-import { appendFileSync, unlinkSync } from "fs"; // filesystem stuff
+import { appendFileSync, createWriteStream, unlinkSync, writeFile } from "fs"; // filesystem stuff
 import { glob } from "glob"; // file collection
 import path = require("path"); // filename printing
-import { execSync, exec } from "child_process"; // execute command line stuff
-
+import { ChildProcessWithoutNullStreams, exec, spawn } from "child_process"; // execute command line stuff
+import fetch from "node-fetch";
+import { DH_STATES, DownloaderHelper, DownloadInfoStats, Stats } from "node-downloader-helper";
 
 export class Handler {
     private pathToSuite: string;
@@ -15,23 +16,34 @@ export class Handler {
     private outputConsole: vscode.OutputChannel;
     private tempFilesToDelete: string[];
 
+    private architecture = process.arch; // x64 or arm64
+    private platform = process.platform; // win32, linux, darwin
+    private config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("icegenius-extension");
+
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    private ENV_CMD: string;
+    private ENV_CMD: string = "";
 
     // constructor to init the Handler
     constructor() {
-        // grab user configurations for the extension
-        const config: vscode.WorkspaceConfiguration =
-            vscode.workspace.getConfiguration("iCEGenius-extension");
-
-        // set the path to the tools, if none found default to C:\oss-cad-suite
-        this.pathToSuite = config.get("oss-cad-suite-path", "C:\\oss-cad-suite");
-        this.ENV_CMD = `${this.pathToSuite}/environment.bat`;
-        // this command will automatically run gtkwave after simulation compiles unless otherwise specified
-        this.autoOpenGTK = config.get("auto-open-gtkwave", true);
 
         // create global output channel
         this.outputConsole = vscode.window.createOutputChannel("iCEGenius");
+
+        // set the path to the tools, if none found install it
+        this.pathToSuite = this.config.get("oss-cad-suite-path", "");
+        if (this.pathToSuite === "") {
+            this.outputConsole.show();
+            this.outputConsole.appendLine("oss-cad-suite path not found. Installing...");
+            this.installOssCadSuite();
+        }
+
+        // if on windows, need to activate batch file to set env variables correctly
+        if (this.platform === "win32") {
+            this.ENV_CMD = this.pathToSuite + "environment.bat";
+        }
+
+        // this command will automatically run gtkwave after simulation compiles unless otherwise specified
+        this.autoOpenGTK = this.config.get("auto-open-gtkwave", true);
 
         // create an array to hold files that need to be deleted when cleanup is called
         this.tempFilesToDelete = [];
@@ -41,8 +53,7 @@ export class Handler {
         this.currSim = false;
     }
 
-
-    // function to execute automatic simulation
+    // method to compile the verilog into a simulation
     public simulate(cwd: string) {
         // start output
         this.outputConsole.show(true);
@@ -68,6 +79,7 @@ export class Handler {
         // if none found, nothing to do so exit
         if (totalFiles.length < 1) {
             this.outputConsole.appendLine("No *.v files found , exiting...");
+            this.currSim = false;
             return;
         }
 
@@ -86,12 +98,13 @@ export class Handler {
         this.outputConsole.appendLine("");
 
         // build commands to run
-        const CD_CMD: string = `cd /d ${fixedPath}`;
-        const IVERILOG_CMD: string = `iverilog -o sim -c ${textFilePath}`;
-        const VVP_CMD: string = `vvp sim`;
+        const CD_CMD: string = `cd ${fixedPath}`;
+        const PREFIX: string = `${this.pathToSuite}bin/`;
+        const IVERILOG_CMD: string = `${PREFIX}iverilog -o sim -c ${textFilePath}`;
+        const VVP_CMD: string = `${PREFIX}vvp sim`;
 
         // build full set of commands based on if the user wants to open gtkwave
-        const FULL_CMD: string = `${CD_CMD} && ${this.ENV_CMD} && ${IVERILOG_CMD} && ${VVP_CMD}`;
+        let FULL_CMD: string = `${IVERILOG_CMD} && ${VVP_CMD}`;
 
         this.runCommand(FULL_CMD, fixedPath);
         return;
@@ -141,6 +154,7 @@ export class Handler {
         else if (pcfFiles.length === 0) {
             this.outputConsole.appendLine("No *.pcf files found, cannot constrain external inputs and outputs!");
             this.outputConsole.appendLine("Exiting...");
+            this.currBuild = false;
             return;
         }
         const pcf: string = pcfFiles[0];
@@ -160,19 +174,195 @@ export class Handler {
         appendFileSync(ysFilePath, `\nsynth_ice40 -device lp -json out.json`);
 
         // setup commands
-        const CD_CMD: string = `cd /d ${fixedPath}`; // switch to cwd
-        const YOSYS_CMD: string = `yosys -s synth.ys`; // run synthesis command
-        const NEXTPNR_CMD: string = `nextpnr-ice40 -v --json out.json --pcf ${pcf} --lp384 --package qn32 --asc out.asc`; // run implementation
-        const ICEPACK_CMD: string = `icepack out.asc bitstream.bin`; // generate bitstream
+        const PREFIX: string = `${this.pathToSuite}bin/`;
+        const YOSYS_CMD: string = `${PREFIX}yosys -s synth.ys`; // run synthesis command
+        const NEXTPNR_CMD: string = `${PREFIX}nextpnr-ice40 -v --json out.json --pcf ${pcf} --lp384 --package qn32 --asc out.asc`; // run implementation
+        const ICEPACK_CMD: string = `${PREFIX}icepack out.asc bitstream.bin`; // generate bitstream
         const PROG_CMD: string = `echo PROGRAMMER NOT DONE`; // ! NOT DONE flash to board
 
-        const FULL_CMD = `${CD_CMD} && ${this.ENV_CMD} && ${YOSYS_CMD} && ${NEXTPNR_CMD} && ${ICEPACK_CMD} && ${PROG_CMD}`;
+        let FULL_CMD = `${YOSYS_CMD} && ${NEXTPNR_CMD} && ${ICEPACK_CMD} && ${PROG_CMD}`;
 
         // run command
         this.runCommand(FULL_CMD, fixedPath);
         return;
     }
 
+    private async runCommand(command: string, path: string) {
+        try { // attempt to successfully run all simulation commands 
+            if (this.platform === "win32") {
+                command = `${this.ENV_CMD} && ${command}`;
+            }
+
+            this.outputConsole.appendLine(`Executing ${command}`);
+
+            // spawn new process and run command
+            let childOut = spawn(command, { shell: true, cwd: path });
+
+            // listen to stdout and stderr and output data live
+            childOut.stdout.on('data', (data: string) => {
+                this.outputConsole.appendLine(data);
+            });
+
+            childOut.stderr.on('data', (data: string) => {
+                this.outputConsole.appendLine(data);
+            });
+
+            // after process exits, either emit the code and/or run gtkwave
+            childOut.on('close', (code: number) => {
+                if (code !== 0) {
+                    this.outputConsole.appendLine(`Exited with code ${code}!`);
+                    this.cleanup();
+                    return;
+                }
+                this.outputConsole.appendLine("Exited successfully (code 0)");
+                // open gtkwave automatically if true and simulation is happening
+                if (this.autoOpenGTK && this.currSim) {
+                    const vcdFile = glob.sync(path + '/**/*.vcd')[0];
+                    const GTK_CMD: string = `${this.pathToSuite}bin/gtkwave ${vcdFile}`;
+                    if (this.platform === "win32") {
+                        exec(`${this.ENV_CMD} && ${GTK_CMD}`);
+                    }
+                    else {
+                        exec(`${GTK_CMD}`);
+                    }
+                }
+                this.cleanup();
+                this.outputConsole.appendLine("==================== Finished ====================\n");
+            });
+        }
+        // if a command fails, return it to the user so they might fix
+        catch (cmd_err: any) {
+            this.outputConsole.appendLine("Something went wrong!");
+            this.printErrToConsole(cmd_err);
+            this.outputConsole.appendLine("Hint: If the error refers to \"module already declared\",");
+            this.outputConsole.appendLine("temporarily remove any `include statements throughout your .v files");
+            this.outputConsole.appendLine("This may result in red squiggles, but will fix actual simulation");
+            this.outputConsole.appendLine("==================== Finished ====================\n");
+            this.cleanup();
+        }
+    }
+
+    // method to install the oss-cad-suite onto the machine
+    private async installOssCadSuite() {
+        // use github rest api to get latest release
+        const api = "https://api.github.com/repos/YosysHQ/oss-cad-suite-build/releases/latest";
+        try {
+            const responseAPI = await fetch(api);
+            if (!responseAPI.ok) {
+                this.outputConsole.appendLine("Response not ok!");
+                return;
+            }
+            const data = await responseAPI.json() as any;
+
+            // based on platform and architecture, download the appropriate file
+            let archiveName = "";
+            let downloadUrl = "";
+            if (this.platform === "win32") {
+                this.pathToSuite = `${process.env.APPDATA}`;
+                archiveName = data.assets[4].name;
+                downloadUrl = data.assets[4].browser_download_url;
+            } else if (this.platform === "darwin" && this.architecture === "arm64") {
+                this.pathToSuite = "/usr/local/opt/";
+                archiveName = data.assets[0].name;
+                downloadUrl = data.assets[0].browser_download_url;
+            } else if (this.platform === "darwin" && this.architecture === "x64") {
+                this.pathToSuite = "/usr/local/opt/";
+                archiveName = data.assets[1].name;
+                downloadUrl = data.assets[1].browser_download_url;
+            } else if (this.platform === "linux" && this.architecture === "arm64") {
+                this.pathToSuite = "/opt/";
+                archiveName = data.assets[2].name;
+                downloadUrl = data.assets[2].browser_download_url;
+            } else if (this.platform === "linux" && this.architecture === "x64") {
+                this.pathToSuite = "/opt/";
+                archiveName = data.assets[3].name;
+                downloadUrl = data.assets[3].browser_download_url;
+            } else {
+                throw new Error(`Unknown platform/architecture combination: got ${this.platform} / ${this.architecture}`);
+            }
+
+            this.outputConsole.appendLine(`Downloading archive from ${downloadUrl}`);
+
+            // download file from the url
+            const downloader = new DownloaderHelper(downloadUrl, this.pathToSuite);
+            downloader.on("download", (stats: DownloadInfoStats) => {
+                this.outputConsole.appendLine(`Size: ${stats.totalSize}B`);
+            });
+            downloader.on("timeout", () => {
+                throw new Error("Timeout while downloading...");
+            });
+            downloader.on('error', (err) => { throw err; });
+            downloader.on('end', () => {
+                this.outputConsole.appendLine('Download Completed!');
+                // execute .exe or tar to unzip
+                this.outputConsole.appendLine(`Unpacking ${archiveName}...`);
+
+                let command: string = "";
+                let extractor: ChildProcessWithoutNullStreams;
+
+                if (this.platform === "darwin" || this.platform === "linux") {
+                    command = "tar -xvzf ";
+                }
+
+                // run extractor with extra command if on linux or macos, or just run .exe file on windows
+                extractor = spawn(`${command + this.pathToSuite + '/' + archiveName}`, {
+                    cwd: this.pathToSuite
+                });
+                extractor.stdout.on("data", (data) => {
+                    this.outputConsole.appendLine(data);
+                });
+                extractor.stderr.on("data", (data) => {
+                    this.outputConsole.appendLine(data);
+                });
+                extractor.on("error", (err) => {
+                    throw err;
+                });
+
+                // update path when everything is done
+                extractor.on("close", () => {
+                    this.outputConsole.appendLine("Done unpacking!");
+                    // on mac, allow execution of quarantied files using activate script
+                    if (this.platform === "darwin") {
+                        exec(`${this.pathToSuite + "/oss-cad-suite/activate"}}`);
+                    }
+
+                    // update path after setup is complete
+                    this.pathToSuite = this.pathToSuite + "/oss-cad-suite";
+
+                    // on windows, update env cmd and add correct delimiter
+                    this.pathToSuite += "/";
+                    if (this.platform === "win32") {
+                        this.ENV_CMD = this.pathToSuite + "environment.bat";
+                    }
+                    else {
+                        this.ENV_CMD = "";
+                    }
+
+                    this.config.update("oss-cad-suite-path", this.pathToSuite, true);
+                });
+            });
+            downloader.on("progress.throttled", (stats: Stats) => {
+                this.outputConsole.append(".");
+            });
+            await downloader.start();
+        } catch (error) {
+            this.outputConsole.appendLine("Failed to install oss-cad-suite!");
+            this.printErrToConsole(error);
+        }
+    }
+
+    // method to print errors to the console
+    private printErrToConsole(err: any) {
+        if (typeof err === 'string') {
+            this.outputConsole.appendLine(`Error: ${err}`);
+        }
+        else if (err instanceof Error) {
+            this.outputConsole.appendLine(`Error: ${err.message}`);
+        }
+        else { // just in case something goes horrifically wrong
+            this.outputConsole.appendLine("Unknown Error Occurred");
+        }
+    }
 
     // helper functions
     private cleanup() {
@@ -183,42 +373,6 @@ export class Handler {
         this.tempFilesToDelete = [];
         this.currBuild = false;
         this.currSim = false;
-    }
-
-    
-    private runCommand(command: string, path:string ){
-        try { // attempt to successfully run all simulation commands 
-            this.outputConsole.appendLine(`Executing ${command}`);
-            this.outputConsole.appendLine(execSync(command).toString());
-
-            // open gtkwave automatically if true and simulation is happening
-            if (this.autoOpenGTK && this.currSim) {
-                const vcdFile = glob.sync(path + '/**/*.vcd')[0];
-                const GTK_CMD: string = `gtkwave ${vcdFile}`;
-                exec(`${this.ENV_CMD} && ${GTK_CMD}`);
-            }
-
-        }
-        catch (cmd_err: any) { // if a command fails, return it to the user so they might fix
-            this.outputConsole.appendLine("Something went wrong!");
-            if (typeof cmd_err === 'string') {
-                this.outputConsole.appendLine(cmd_err);
-            }
-            else if (cmd_err instanceof Error) {
-                this.outputConsole.appendLine(cmd_err.message);
-            }
-            else { // just in case something goes horrifically wrong
-                this.outputConsole.appendLine("Unknown Error Occurred");
-            }
-            this.outputConsole.appendLine("Hint: If the error refers to \"module already declared\",");
-            this.outputConsole.appendLine("temporarily remove any `include statements throughout your .v files");
-            this.outputConsole.appendLine("This may result in red squiggles, but will fix actual simulation");
-        }
-        finally {
-            // no matter what happens, delete temp files and end simulation
-            this.outputConsole.appendLine("==================== Finished ====================\n");
-            this.cleanup();
-        }
     }
 
 }

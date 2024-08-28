@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const helper: Handler = new Handler(); // instantiate helper class
 
 	// register the two commands
-	let simulator: vscode.Disposable = vscode.commands.registerCommand('iCEGenius-extension.sim', () => {
+	let simulator: vscode.Disposable = vscode.commands.registerCommand('icegenius-extension.sim', () => {
 		// if a workspace is open, try and read the folders in that
 		const workspaceFolders: readonly vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
 		// if no workspace is open, get folder from currently open file
@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		// if nothing after that, then we kill program
-		if (!folderPath){
+		if (!folderPath) {
 			vscode.window.showErrorMessage("Could not get file path, open a folder using Ctrl + K + O");
 			return;
 		}
@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 		helper.simulate(folderPath);
 	});
 
-	let builder: vscode.Disposable = vscode.commands.registerCommand('iCEGenius-extension.buildAndUpload', () => { 
+	let builder: vscode.Disposable = vscode.commands.registerCommand('icegenius-extension.buildAndUpload', () => {
 		// if a workspace is open, try and read the folders in that
 		const workspaceFolders: readonly vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
 		// if no workspace is open, get folder from currently open file
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		// if nothing after that, then we kill program
-		if (!folderPath){
+		if (!folderPath) {
 			vscode.window.showErrorMessage("Could not get file path, open a folder using Ctrl + K + O");
 			return;
 		}
@@ -63,4 +63,4 @@ export function activate(context: vscode.ExtensionContext) {
 
 // This method is called when your extension is deactivated
 // probably don't need?
-export function deactivate() {}
+export function deactivate() { }

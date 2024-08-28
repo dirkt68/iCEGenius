@@ -1,3 +1,4 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "icegenius-extension.oss-cad-suite-path": "C:\\Users\\dirkt\\AppData\\Roaming/oss-cad-suite/"
 }
